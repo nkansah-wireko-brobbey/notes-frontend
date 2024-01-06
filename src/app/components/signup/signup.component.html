@@ -10,19 +10,19 @@
                 <div class="card-body">
                   <h5 class="card-title">Let's Sign You Up!</h5>
                   <br>
-                  <form>
+                  <form [formGroup]="signupData" (ngSubmit)="onSubmit()">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="exampleInputPassword1">First name</label>
-                                <input type="text" class="form-control rounded-0" id="exampleInputPassword1" placeholder="Password">
+                                <label for="firstname">First name</label>
+                                <input type="text" class="form-control rounded-0" id="firstname" placeholder="First name" formControlName="firstName">
                               </div>
                         </div>
                         <br>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Last name</label>
-                                <input type="text" class="form-control rounded-0" id="exampleInputPassword1" placeholder="Password">
+                                <label for="lastname">Last name</label>
+                                <input type="text" class="form-control rounded-0" id="lastname" placeholder="Last name" formControlName="lastName">
                               </div>
                         </div>
                     </div>
@@ -30,34 +30,33 @@
                       
                       
                     <div class="form-group">
-                      <label for="exampleInputEmail1">Email address</label>
-                      <input type="email" class="form-control rounded-0" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                      <label for="email">Email address</label>
+                      <input type="email" class="form-control rounded-0" id="email" aria-describedby="emailHelp" placeholder="Enter email" formControlName="email">
                       <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                     </div>
                     <br>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Password</label>
-                                <input type="password" class="form-control rounded-0" id="exampleInputPassword1" placeholder="Password">
+                                <label for="password">Password</label>
+                                <input type="password" class="form-control rounded-0" id="password" placeholder="Password" formControlName="password">
                               </div>
                         </div>
                         <br>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Confirm Password</label>
-                                <input type="password" class="form-control rounded-0" id="exampleInputPassword1" placeholder="Password">
+                                <label for="confirmPassword">Confirm Password</label>
+                                <input type="password" class="form-control rounded-0" id="confirmPassword" placeholder="Password" formControlName="confirmPassword">
                               </div>
                         </div>
                     </div>
-                   
-                    
+                                       
                     <div class="form-group form-check">
                       <input type="checkbox" class="form-check-input" id="exampleCheck1">
                       <label class="form-check-label" for="exampleCheck1">Check me out</label>
                     </div>
                     <br>
-                    <button type="submit" class="btn btn-primary rounded-0">Sign Up</button>
+                    <button type="submit" class="btn btn-primary rounded-0" [disabled]="signupData.invalid">Sign Up</button>
                   </form>
                   <!-- <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p> -->
                   <p class="card-text text-end"><small class="text-muted">Already have an account? <a href="#" class="link" routerLink="/login">Login</a></small></p>
