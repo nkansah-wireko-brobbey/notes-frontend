@@ -1,0 +1,8 @@
+
+<div class="container1" *ngIf="getStatus()">
+    <div class="card" [ngClass]="{'success-border':isSuccess, 'error-border':isWarning}">
+      <h1 class="title">{{modalData.title}}</h1>
+      <p class="subtitle">{{modalData.body}}</p>
+      <button class="btn" [ngClass]="{'btn-success':isSuccess, 'btn-error':isWarning}" (click)="hide()">{{modalData.buttonText}} </button>
+    </div>
+</div>
