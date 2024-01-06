@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms'; // 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // 
+import { HttpClientModule } from '@angular/common/http';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -12,6 +13,7 @@ import { NoteAddComponent } from './components/note/note-add/note-add.component'
 import { NoteEditComponent } from './components/note/note-edit/note-edit.component';
 import { NoteListComponent } from './components/note-list/note-list.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { ModalComponent } from './utils/modal/modal.component';
 
 
 
@@ -24,11 +26,14 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     NoteAddComponent,
     NoteEditComponent,
     NoteListComponent,
-    NavbarComponent
+    NavbarComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
     AppRoutingModule
   ],
   providers: [],
