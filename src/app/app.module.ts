@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -14,6 +14,7 @@ import { NoteEditComponent } from './components/note/note-edit/note-edit.compone
 import { NoteListComponent } from './components/note-list/note-list.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ModalComponent } from './utils/modal/modal.component';
+import { authInterceptor } from './services/interceptors/auth.interceptor';
 
 
 
@@ -36,7 +37,13 @@ import { ModalComponent } from './utils/modal/modal.component';
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    provideHttpClient(
+      withInterceptors(
+        [authInterceptor]
+      )
+    )
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
