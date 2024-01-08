@@ -17,11 +17,14 @@ export class ModalService {
   }
 
   public showSuccessModal(data: modalData): void {
+
+    if(!customElements.get('custom-modal')){
     // Create element
     const ModalElement = createCustomElement(ModalComponent, { injector: this.injector });
     // Create a custom element
     customElements.define('custom-modal', ModalElement);
-
+    
+    }
     // Create an instance of the element
     const modal: NgElement & WithProperties<ModalComponent> = document.createElement('custom-modal') as any;
 
