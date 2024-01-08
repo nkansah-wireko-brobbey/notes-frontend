@@ -4,6 +4,7 @@ import { SignupRequest } from '../../models/auth';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModalService } from '../../services/modal.service';
 import { modalData } from '../../models/ui';
+import { firstValueFrom } from 'rxjs';
 
 
 @Component({
@@ -43,7 +44,7 @@ export class SignupComponent {
     return password === confirmPassword ? null : { 'passwordMismatch': true };
   }
 
-  onSubmit(): void {
+  async onSubmit(): Promise<void> {
 
     console.log(this.signupData);
         
@@ -51,28 +52,31 @@ export class SignupComponent {
 
     console.log(this.formData);
 
-    this.authService.signup(this.formData).subscribe(
-      (response) => {
-        if(response.token){
-          this.modalData = {
-            title: 'Success',
-            body: 'Signup Successful',
-            buttonText: 'login',
-            modalType: 'success'
-          }
-          this.modalService.showSuccessModal(this.modalData);
-        }else{
-          this.modalData = {
-            title: 'Error',
-            body: 'Signup Failed',
-            buttonText: 'Try Again',
-            modalType: 'error'
-          }
-          this.modalService.showSuccessModal(this.modalData);
+    let feedback: any;
+
+    try {
+      const response = await firstValueFrom(this.authService.signup(this.formData));
+      if(response.token){
+        this.modalData = {
+          title: 'Success',
+          body: 'Signup Successful',
+          buttonText: 'login',
+          modalType: 'success',
+          navigateTo: '/login'
         }
-        console.log(response);
+        this.modalService.showSuccessModal(this.modalData);
       }
-    );
+    } catch (error: any) {
+      delete this.modalData.navigateTo;
+      this.modalData = {
+        title: 'Error',
+        body: 'An error occurred: ' + (error?.error || 'Contact support'),
+        buttonText: 'Try Again',
+        modalType: 'error'
+      }
+      this.modalService.showSuccessModal(this.modalData);
+      console.log(error);
+    }
   }
 
 
