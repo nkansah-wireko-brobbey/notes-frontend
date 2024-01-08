@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
+import { UserService } from '../../services/user.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModalService } from '../../services/modal.service';
 import { modalData } from '../../models/ui';
@@ -21,7 +21,7 @@ export class LoginComponent {
   });
 
   constructor(
-    private authService: AuthService, 
+    private userService: UserService, 
     private modalService: ModalService,
     private formBuilder: FormBuilder,
     private storageService: StorageService
@@ -34,7 +34,7 @@ export class LoginComponent {
   public test(){
     this.modalService.showSuccessModal(this.modalData);
     
-    this.authService.test().subscribe(
+    this.userService.test().subscribe(
       res => {
         console.log(res);
       }
@@ -57,7 +57,7 @@ export class LoginComponent {
 
     try {
 
-      const response = await firstValueFrom(this.authService.login(formData));
+      const response = await firstValueFrom(this.userService.login(formData));
       if(response.token){
         this.modalService.showSuccessModal(this.modalData);
         console.log(response);

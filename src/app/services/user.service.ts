@@ -7,7 +7,7 @@ import { LoginRequest, SignupRequest } from '../models/auth';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class UserService {
 
     // Define API
     apiURL = environment.apiUrl;

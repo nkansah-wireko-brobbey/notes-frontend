@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
+import { UserService } from '../../services/user.service';
 import { SignupRequest } from '../../models/auth';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModalService } from '../../services/modal.service';
@@ -34,7 +34,7 @@ export class SignupComponent {
   }
   
 
-  constructor(private authService: AuthService, private formBuilder: FormBuilder, private modalService: ModalService){
+  constructor(private userService: UserService, private formBuilder: FormBuilder, private modalService: ModalService){
 
   }
   passwordMatchValidator(group: FormGroup): { [key: string]: boolean } | null {
@@ -55,7 +55,7 @@ export class SignupComponent {
     let feedback: any;
 
     try {
-      const response = await firstValueFrom(this.authService.signup(this.formData));
+      const response = await firstValueFrom(this.userService.signup(this.formData));
       if(response.token){
         this.modalData = {
           title: 'Success',
