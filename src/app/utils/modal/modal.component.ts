@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { modalData } from '../../models/ui';
-// import { constructor } from 'jasmine';
+import { Router } from '@angular/router';
+import { ModalService } from '../../services/modal.service';
 
 @Component({
   selector: 'app-modal',
@@ -16,7 +17,7 @@ export class ModalComponent implements OnInit {
 
   @Input() modalData: modalData = {} as modalData;
 
-  constructor() { 
+  constructor(private router: Router, private modalService: ModalService) { 
     
   }
 
@@ -44,6 +45,12 @@ export class ModalComponent implements OnInit {
 
   public hide(){
     this.status = false;
+    this.modalService.hideSuccessModal();
+    
+    //Navigate to the route specified in the modalData
+    if(this.modalData.navigateTo){
+      this.router.navigate([this.modalData.navigateTo]);
+    }
   }
 
   public toggle(){
