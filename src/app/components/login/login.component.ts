@@ -5,6 +5,7 @@ import { ModalService } from '../../services/modal.service';
 import { modalData } from '../../models/ui';
 import { firstValueFrom } from 'rxjs';
 import { StorageService } from '../../services/storage.service';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +25,8 @@ export class LoginComponent {
     private userService: UserService, 
     private modalService: ModalService,
     private formBuilder: FormBuilder,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private authService: AuthService
     ) { }
 
   ngOnInit(){
@@ -62,6 +64,7 @@ export class LoginComponent {
         this.modalService.showSuccessModal(this.modalData);
         console.log(response);
         this.storageService.saveToken(response.token);
+        this.authService.setLoginStatus(true);
       }
     } catch (error: any) {
       console.log(error);
@@ -72,6 +75,7 @@ export class LoginComponent {
         modalType: 'error'
       }
       this.modalService.showSuccessModal(this.modalData);
+      this.authService.setLoginStatus(false);
     }
   }
 
