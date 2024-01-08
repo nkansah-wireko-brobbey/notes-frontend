@@ -3,4 +3,5 @@ export interface modalData {
     body: string;
     buttonText: string;
     modalType?: any;
+    navigateTo?: string;
 }
