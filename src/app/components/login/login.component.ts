@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import { FormBuilder, FormGroup, Validator } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModalService } from '../../services/modal.service';
 import { modalData } from '../../models/ui';
+import { firstValueFrom } from 'rxjs';
+import { StorageService } from '../../services/storage.service';
 
 @Component({
   selector: 'app-login',
@@ -10,20 +12,23 @@ import { modalData } from '../../models/ui';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  modalTitle: string = 'Success!';
-  modalBody: string = 'You have successfully logged in!';
 
-  modalData : modalData = {
-    title: 'Success!',
-    body: 'You have successfully logged in!',
-    buttonText: 'Close',
-    modalType: 'success'
-  }
+  modalData : modalData = {} as modalData;
 
-  constructor(private authService: AuthService, private modalService: ModalService) { }
+  loginData: FormGroup = this.formBuilder.group({
+    email: ['',[Validators.required, Validators.email]],
+    password: ['',[Validators.required, Validators.minLength(4)]]
+  });
+
+  constructor(
+    private authService: AuthService, 
+    private modalService: ModalService,
+    private formBuilder: FormBuilder,
+    private storageService: StorageService
+    ) { }
 
   ngOnInit(){
-    this.test();
+   
   }
 
   public test(){
@@ -34,6 +39,40 @@ export class LoginComponent {
         console.log(res);
       }
     );
+  }
+
+  async onSubmit(): Promise<void> {
+    console.log(this.loginData.value);
+    const formData = this.loginData.value;
+
+    this.storageService.deleteToken();
+
+    this.modalData = {
+      title: 'Success!',
+      body: 'You have successfully logged in!',
+      buttonText: 'Close',
+      modalType: 'success',
+      navigateTo: '/notes'
+    }
+
+    try {
+
+      const response = await firstValueFrom(this.authService.login(formData));
+      if(response.token){
+        this.modalService.showSuccessModal(this.modalData);
+        console.log(response);
+        this.storageService.saveToken(response.token);
+      }
+    } catch (error: any) {
+      console.log(error);
+      this.modalData = {
+        title: 'Error',
+        body: 'An error occurred: ' + (error?.error || 'Contact support'),
+        buttonText: 'Close',
+        modalType: 'error'
+      }
+      this.modalService.showSuccessModal(this.modalData);
+    }
   }
 
   public showSuccessModal(){
