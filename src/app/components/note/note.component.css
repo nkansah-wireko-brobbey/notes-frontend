@@ -1,0 +1,25 @@
+.truncate {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2; /* Number of lines to display before truncating */
+              /* Set a maximum width for the container */
+  }
+
+  .truncate-title{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;   
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 1; /* Number of lines to display before truncating */
+  }
+
+  .note-card {
+    transition: box-shadow 0.3s ease-in-out;
+  }
+
+  .note-card:hover{
+    box-shadow: 0 0 20px rgba(36, 13, 240, 0.2);
+    cursor: pointer;
+  }

@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Note } from '../../models/note';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-note',
@@ -7,4 +9,16 @@ import { Component } from '@angular/core';
 })
 export class NoteComponent {
 
+  constructor(
+   private router: Router
+  ) { }
+
+  @Input() note: Note = {} as Note;
+
+  getNoteDetails(): any {
+    console.log("Clicked: "+this.note);
+
+    this.router.navigate(['/notes', this.note.id])
+  
+  }
 }

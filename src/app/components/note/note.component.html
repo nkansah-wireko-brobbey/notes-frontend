@@ -1,1 +1,8 @@
-<p>note works!</p>
+
+<div class="card text-center border border-primary note-card" (click)="getNoteDetails()">
+    <div class="card-body">
+      <h5 class="card-title">{{note.title}}</h5>
+      <p class="card-text truncate">{{note.content}}</p>
+      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+    </div>
+  </div>
