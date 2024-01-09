@@ -1,1 +1,23 @@
-<p>note-add works!</p>
+<div class="container">
+    <div class="border border-primary p-5 mt-5">
+
+        <form [formGroup]="noteForm" (ngSubmit)="onsubmit()">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Title</label>
+                <input type="text" class="form-control rounded-0" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter title" formControlName="title">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your notes with anyone else.</small>
+            </div>
+    
+            <br>
+    
+            <div class="form-group">
+                <label for="exampleInputPassword1">Description</label>
+                <textarea class="form-control rounded-0" id="exampleFormControlTextarea1" rows="3" formControlName="content"></textarea>
+            </div>
+    
+            <br>
+    
+            <button type="submit" class="btn btn-primary rounded-0">Add Note</button>
+        </form>
+    </div>
+</div>
