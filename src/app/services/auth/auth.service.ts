@@ -5,15 +5,15 @@ import { Injectable } from '@angular/core';
 })
 export class AuthService {
 
-  private loginStatus = false;
+  private static loginStatus = false;
 
   constructor() { }
 
   public setLoginStatus(status: boolean){
-    this.loginStatus = status;
+    AuthService.loginStatus = status;
   }
 
   public isUserLoggedIn(): boolean{
-    return this.loginStatus;
+    return AuthService.loginStatus;
   }
 }
