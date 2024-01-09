@@ -4,11 +4,14 @@ import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { NoteListComponent } from './components/note-list/note-list.component';
+import { authGuard } from './guards/auth.guard';
+import { NoteAddComponent } from './components/note/note-add/note-add.component';
+import { NoteEditComponent } from './components/note/note-edit/note-edit.component';
 
 const routes: Routes = [
   
   { path: 'login', 
-  component: LoginComponent,
+  component: LoginComponent, 
   pathMatch: 'full' },
   
   { path: 'signup',
@@ -16,8 +19,8 @@ const routes: Routes = [
   pathMatch: 'full' },
 
   { path: '',
-redirectTo: '/login',
-pathMatch: 'full',
+    redirectTo: '/login',
+    pathMatch: 'full',
 },
 {
   path: '',
@@ -25,8 +28,17 @@ pathMatch: 'full',
   children: [ 
     {
       path: 'notes',
-      component: NoteListComponent
+      component: NoteListComponent,canActivate: [authGuard]
     },
+    {
+      path:'notes/new',
+      component: NoteAddComponent,
+    },
+    {
+      path: 'notes/:id',
+      component: NoteEditComponent,
+      
+    }
   
   ]
 }
