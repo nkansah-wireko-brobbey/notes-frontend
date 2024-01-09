@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class NavbarComponent {
 
+  routes: {home: string, new: string} = {
+    home: '/notes',
+    new: '/notes/new'
+  }
 }
