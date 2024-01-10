@@ -10,10 +10,11 @@ export class AuthService {
   constructor() { }
 
   public setLoginStatus(status: boolean){
+    localStorage.setItem('loggedIn', status.toString());
     AuthService.loginStatus = status;
   }
 
   public isUserLoggedIn(): boolean{
-    return AuthService.loginStatus;
+    return (Boolean)(localStorage.getItem('loggedIn'));
   }
 }

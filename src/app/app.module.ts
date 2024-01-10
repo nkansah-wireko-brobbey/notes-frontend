@@ -15,6 +15,8 @@ import { NoteListComponent } from './components/note-list/note-list.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ModalComponent } from './utils/modal/modal.component';
 import { authInterceptor } from './services/interceptors/auth.interceptor';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+// import { 404Component } from './components/404/404.component';
 
 
 
@@ -28,7 +30,8 @@ import { authInterceptor } from './services/interceptors/auth.interceptor';
     NoteEditComponent,
     NoteListComponent,
     NavbarComponent,
-    ModalComponent
+    ModalComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
