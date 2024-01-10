@@ -7,6 +7,7 @@ import { NoteListComponent } from './components/note-list/note-list.component';
 import { authGuard } from './guards/auth.guard';
 import { NoteAddComponent } from './components/note/note-add/note-add.component';
 import { NoteEditComponent } from './components/note/note-edit/note-edit.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 const routes: Routes = [
   
@@ -37,10 +38,14 @@ const routes: Routes = [
     {
       path: 'notes/:id',
       component: NoteEditComponent,
-      
+
     }
   
   ]
+},
+{
+  path: '**',
+  component: NotFoundComponent,
 }
 ];
 
