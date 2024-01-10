@@ -1,7 +1,7 @@
 // Define your environment-specific variables here
 export const environment = {
     production: false,
-    apiUrl: 'http://localhost:9000/api',
+    apiUrl: 'https://notes-server.azurewebsites.net/api',
     auth: {
         signup: '/users/signup',
         login: '/users/login',
